@@ -15,8 +15,8 @@
 
         <div class="title-box">
           <div id="title-text" class="title-text" style="display: inline;">
-            <label>表单名称：<input type="text" id="title-ipt" placeholder="输入表单名称" class="tit-ipt focus" name="formName"></label>
-            <label>SN：<input type="text" id="title-sn" placeholder="输入" class="tit-ipt focus" name="sn"></label>
+            <label>表单名称：<input v-model="formName" type="text" id="title-ipt" placeholder="输入表单名称" class="tit-ipt focus" name="formName"></label>
+            <label>SN：<input v-model="sn" type="text" id="title-sn" placeholder="输入" class="tit-ipt focus" name="sn"></label>
           </div>
           <div style="display: inline-block;">
             所属系统：

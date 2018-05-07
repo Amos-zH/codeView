@@ -9,8 +9,7 @@
     "server": "webpack-dev-server --open",
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
-    "devx": "node build/devx.js",
-    "webpack": "webpack"
+    "devx": "node build/devx.js"
   },
   "keywords": [
     "vue-codepen monaco-editor web-editor"
@@ -67,8 +66,10 @@
     "webpack-merge": "^4.1.2"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "feather-icons": "^4.7.0",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "vue-axios": "^2.1.1"
   },
   "engines": {
     "node": ">= 4.0.0",

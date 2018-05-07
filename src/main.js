@@ -2,6 +2,8 @@
 import './assets/css/style.scss';
 import Vue from 'vue';
 import App from './App.vue';
+import axios from 'axios';
+Vue.prototype.$http = axios;
 
 
 // 现在我们可以启动应用了！

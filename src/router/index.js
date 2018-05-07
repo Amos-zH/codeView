@@ -2,15 +2,11 @@
 import store from 'store';
 import vs from '../vs/vs.all';
 import config from '../config';
+import axios from 'axios';
 import * as Theme from '../vs/theme';
 import { setEditorValueAndRun, clearEditorStore } from '../vs/editor'
 import layout from '../components/layout.vue';
 import penSettingDialog from '../components/penSettingDialog.vue';
-
-
-
-
-
 
 var title = "无标题的";
 
@@ -37,14 +33,11 @@ var components = {
 
     "layout": layout,
     "penSettingDialog": penSettingDialog
-
-
 };
-
 
 //数据
 var data = {
-    version: vs.version,
+    version: '',
     convertMode: convertMode,
     theme: theme,
     imgExt: imgExt,
@@ -61,19 +54,19 @@ var data = {
     Css: "",
     Js: "",
 
-
     isShowBgMask:false,
     isShowSettingBox: false,
     isShowViewBox: false,
     layoutType: "ly1",
     fontSize: fontSize,
 
+    sn:'',
+    formName:'',
     sys: '',
-    systems: [
-        {id:'1',name:'系统一'},
-        {id:'2',name:'系统二'},
-        {id:'3',name:'系统三'}
-    ]
+    basePath:'',
+    sessionId:'',
+    id:'',
+    systems: []
 };
 
 //方法
@@ -197,12 +190,27 @@ var methods = {
             _json.push(type+'：'+value);
         });
         /*获取表单名称，SN，版本号*/
-        var formName = $('#title-ipt').val(),
-            sn = $('#title-sn').val(),
+        var formName = this.formName,
+            sn = this.sn,
             version = this.version,
             sys = this.sys;
-        _json.push('formName'+':'+formName,'SN'+':'+sn,'version'+':'+version,'SYS'+':'+sys);
-        console.log(JSON.stringify(_json));
+        var saveObj = {name:formName, formSn:sn,systemSn:sys, versionNo:version, htmlContent:store.get('html'), cssContent:store.get('css'), jsContent:store.get('js')};
+
+        $.ajax({
+            url:this.basePath+'/portal/cms/biz_form_info/save.do?sessionId='+this.sessionId, data:saveObj, async:false, type:'POST', dataType:'JSON',
+            success:function(dt){
+                if(dt.responseCode == 1){
+                    alert('保存成功！');
+                }else{
+                    alert('保存失败！');
+                }
+
+            }
+        });
+
+        console.log(saveObj);
+        //_json.push('formName'+':'+formName,'SN'+':'+sn,'version'+':'+version,'SYS'+':'+sys);
+        //console.log(JSON.stringify(_json));
     }
 };
 
@@ -279,7 +287,59 @@ module.exports = {
     },
 
     created: function () {
-        this.sys = this.systems[0].name;//如果没有这句代码，select中初始化会是空白的，默认选中就无法实现
+        var _this = this;
+        var dt = {
+            "id": "8a949ee263248a950163248e04970003",
+            "formType": 1,
+            "name": "通知公告表单1.1.3",
+            "formSn": "notice",
+            "url": "www.taobao.com",
+            "htmlContent": "<div class=\"w-msg-box\">\r\n        <div class=\"form-msg-header jsFormTitleTab\">\r\n            <ul class=\"msg-title\">\r\n                <li class=\" msg-title-tab tab-selected li-first\"><span>基本信息</span></li>\r\n                <li class=\" msg-title-tab li-second\"><span>材料信息</span></li>\r\n            </ul>\r\n        </div>\r\n        <div class=\"form-tab-box jsTabBox\">\r\n            <div class=\"component\">\r\n                <label class=\"label-control\">材料计划编号：</label>\r\n                <input type=\"text\"  class=\"input-md\">\r\n            </div>\r\n            <div class=\"component\">\r\n                <label class=\"label-control\">编制日期：</label>\r\n                <input type=\"text\"  class=\"input-md\">\r\n            </div>\r\n            <div class=\"component\">\r\n                <label class=\"label-control\">编制人：</label>\r\n                <input type=\"text\" class=\"input-md\">\r\n            </div>\r\n            <div class=\"component component-address\">\r\n                <label class=\"label-control\">项目名称：</label>\r\n                <input type=\"text\" class=\"input-md\" value=\"asf2017-9-5\">\r\n                <input type=\"text\" class=\"input-lg ipt-double-right-lg\" value=\"杭州市上城区望江东路299号冠盛大厦\">\r\n            </div>\r\n            <div class=\"component\">\r\n                <label class=\"label-control\">条线：</label>\r\n                <input type=\"text\" class=\"input-md\">\r\n            </div>\r\n            <div class=\"component\">\r\n                <label class=\"label-control\">项目经理：</label>\r\n                <input type=\"text\" class=\"input-md\">\r\n            </div>\r\n            <div class=\"component\">\r\n                <label class=\"label-control\">审核状态：</label>\r\n                <input type=\"text\" class=\"input-md\">\r\n            </div>\r\n            <div class=\"component\">\r\n                <label class=\"label-control\">计划编号：</label>\r\n                <input type=\"text\" class=\"input-md\">\r\n            </div>\r\n            <div class=\"component component-wdouble\">\r\n                <label class=\"label-control\">备注：</label>\r\n",
+            "jsContent": "console.log(12);",
+            "cssContent": "css3",
+            "systemSn": "222",
+            "systemName": "权限系统",
+            "sortNo": 300,
+            "status": 1,
+            "versionNo": "1.1.3",
+            "createTime": "2018-05-03 13:55:47",
+            "creator": "admin",
+            "updateTime": "2018-05-03 20:04:36",
+            "updator": "admin",
+            "delFlag": 1
+        };
+
+        //_this.systems = response.data.systems;
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+        _this.basePath = getQueryString('basePath');
+        _this.sessionId = getQueryString('sessionId');
+        _this.id = getQueryString('id');
+        var url = _this.basePath+'/portal/cms/biz_form_info/getBizFormInfoById.do?sessionId='+_this.sessionId+'&id='+_this.id;
+        $.ajax({url:url, data:{}, async:false,type:'POST', dataType:'JSON', success:function(response){
+            if(response.code == 1){
+                var dt = response.data;
+
+                $.ajax({url:_this.basePath+'/portal/cms/biz_form_info/getAllICSystem.do?sessionId='+_this.sessionId, data:{}, dataType:'JSON', async:false,type:'POST', success:function (res) {
+                    if(res.code == 1){
+                        _this.systems = res.data;
+                        _this.sys = dt.systemName;
+                    }
+                }});
+                //_this.systems = [{id:'111', name:'门户系统'}, {id:'222', name:'权限系统'}];
+                _this.htmlContent = dt.htmlContent;
+                _this.sn = dt.formSn;
+                _this.formName = dt.name;
+                store.set('html', dt.htmlContent);
+                store.set('css', dt.cssContent);
+                store.set('js', dt.jsContent);
+                _this.version = dt.versionNo;
+            }
+        }});
     },
 
     components: components
