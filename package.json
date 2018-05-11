@@ -1,5 +1,5 @@
 {
-  "name": "vue-codepen",
+  "name": "biz-form-editor",
   "version": "0.0.1",
   "description": "vue-codepen monaco-editor",
   "homepage": "https://github.com/heqing0712/vue-codepen",
@@ -14,10 +14,10 @@
   "keywords": [
     "vue-codepen monaco-editor web-editor"
   ],
-  "author": "xiaohe",
+  "author": "xietongjian",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/heqing0712/vue-codepen.git"
+    "type": "gitlab",
+    "url": "https://git.chinayasha.com/xietongjian/biz-form-editor.git"
   },
   "license": "ISC",
   "devDependencies": {

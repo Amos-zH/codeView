@@ -39,7 +39,6 @@ export function ly1() {
         resizerClassName: "resizer-row",
         dir: "row",
         init: function () {
-    
             var i, length, height,
                 boxs = vs.getStore(storeName);
          

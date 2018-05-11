@@ -6,7 +6,6 @@ import AMDLoader from '../common/AMDLoader';
 import {bindPageDialog} from '../dialogs';
 
 vs.init = function () {
-
     //页面弹窗事件
     bindPageDialog();
 

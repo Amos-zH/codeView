@@ -67,7 +67,8 @@
                     Html head 头部
                   </h4>
                   <div class="form-ct">
-                    <textarea name="HtmlHeadStuff" v-model="HtmlHeadStuff" class="j-insubmit" placeholder="&lt;meta&gt; or &lt;link&gt; or &lt;script&gt;"></textarea>
+                    <textarea name="HtmlHeadStuff" v-model="HtmlHeadStuff" class="j-insubmit" placeholder="&lt;meta&gt; or &lt;link&gt; or &lt;script&gt;">
+                    </textarea>
                   </div>
                 </div>
               </div>
@@ -128,9 +129,10 @@
                   <div class="form-c cf quick-add-box">
                     <select id="css-quick-add" class="quick-add-select" v-on:change="quickAdd">
                       <option value="none">---</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">Bootstrap</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css">Foundation</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">Animate.css</option>
+                      <option value="http://hometest.chinayasha.com/assets/css/base.css?v=1.2.0">base.css</option>
+                      <option value="http://hometest.chinayasha.com/assets/css/public.css?v=1.2.0">public.css</option>
+                      <option value="http://hometest.chinayasha.com/assets/css/easyui.css?v=1.2.0">easyui.css</option>
+                      <option value="http://hometest.chinayasha.com/assets/css/form-common.css?v=1.2.0">form-common.css</option>
                     </select>
                   </div>
                 </div>
@@ -162,37 +164,17 @@
                     快速添加
                   </h4>
                   <div class="form-c cf quick-add-box">
-                    <select id="js-quick-add" class="quick-add-select" v-on:change="quickAdd">
+                    <select id="js-quick-add" class="quick-add-select" v-on:change="quickAdd2">
                       <option value="none">---</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js">Angular</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js">Backbone</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js">Bootstrap</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js">D3</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/ember.js/2.11.0/ember.min.js">Ember</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js">GreenSock TweenMax</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js">Handlebars</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js">jQuery</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">jQuery UI</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js">Lodash</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js">Modernizr</option>
-                      <option value="https://cdn.polyfill.io/v2/polyfill.min.js">Polyfill.io</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/polymer/0.5.6/polymer.min.js">Polymer</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js">React</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js">React DOM</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js">Snap.svg</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js">Three.js</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js">Underscore</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js">Vue</option>
-                      <option value="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js">Zepto</option>
-                      <option value="https://cdn.zingchart.com/zingchart.min.js">ZingChart</option>
+                      <option value="http://hometest.chinayasha.com/assets/seajs/sea.js">sea.js</option>
                     </select>
                   </div>
 
-                  <div class="form-c cf quick-select">
+                  <!--<div class="form-c cf quick-select">
                     <a data-src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" v-on:click="quickAdd2" href="javascript:;">
                       jQuery
                     </a>
-                  </div>
+                  </div>-->
                 </div>
 
               </div>

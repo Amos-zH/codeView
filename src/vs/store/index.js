@@ -15,7 +15,6 @@ vs.saveStore = function () {
 
 //获取缓存
 vs.getStore = function (name) {
-
     return storeData[name];
 };
 

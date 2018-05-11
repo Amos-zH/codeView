@@ -42,7 +42,6 @@ export function getModel(id, callback) {
  * @return {function} 回调函数
  */
 export function saveModel(datas, callback) {
-
     if (!datas) return;
 
     var nt = noty({

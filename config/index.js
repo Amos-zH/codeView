@@ -4,8 +4,11 @@ var path = require('path')
 module.exports = {
   build: {
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../index.html'),
+    index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
+    //index: path.resolve('','E:\\project\\GitLab-project\\ysportal\\ysportal-manager\\src\\main\\webapp\\resources\\js\\cms\\code-editor\\index.html'),
+    //assetsRoot: path.resolve('','E:\\project\\GitLab-project\\ysportal\\ysportal-manager\\src\\main\\webapp\\resources\\js\\cms\\code-editor'),
+
     assetsSubDirectory: 'static',
     //Ϊ�˷�����vue-codepen����Ԥ�����õ�Ŀ¼
     assetsPublicPath: './',
@@ -25,7 +28,7 @@ module.exports = {
 
   dev: {
     env: require('./dev.env'),
-    port: 59458,
+    port: 59459,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',

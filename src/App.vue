@@ -1,6 +1,6 @@
 <template>
 
-  <div id="app">
+  <div id="app" oncontextmenu="event.returnValue=false" onselectstart="event.returnValue=false">
 
 
     <div id="editor-container" class="editor-container">
@@ -11,14 +11,14 @@
 
 
 
-      <header class="header">
+      <header class="header" style="min-width: 1250px;">
 
         <div class="title-box">
           <div id="title-text" class="title-text" style="display: inline;">
             <label>表单名称：<input v-model="formName" type="text" id="title-ipt" placeholder="输入表单名称" class="tit-ipt focus" name="formName"></label>
-            <label>SN：<input v-model="sn" type="text" id="title-sn" placeholder="输入" class="tit-ipt focus" name="sn"></label>
+            <label>SN：<input v-model="sn" type="text" id="title-sn" placeholder="输入" class="tit-ipt focus" name="sn" :readonly="isReadOnly" :style="[{background:isReadOnly ? '#e5e5e5' : '#fff'}]"></label>
           </div>
-          <div style="display: inline-block;">
+          <div style="display: inline-block;vertical-align: top;">
             所属系统：
             <select name="" v-model="sys" style="height:32px;line-height:32px;width:200px;">
               <option :value="item.name" v-for="item in systems">{{ item.name }}</option>
@@ -38,6 +38,11 @@
           <a href="javascript:;" v-on:click="setting" class="btn">设置</a>
 
           <a href="javascript:;" @click="saveCode" class="btn">保存</a>
+
+          <a href="javascript:;" @click="publishCode" class="btn">发布</a>
+          <div class="penSettingBox" style="display: none;">
+            <p id="dialog-confirm">此操作将会发布到正式环境，并增加一个版本号，确定吗？</p>
+          </div>
           <!-- 视图栏弹出 -->
           <div class="view-box" id="view-box" v-bind:class="{ active: isShowViewBox }">
             <div class="view-wrap">

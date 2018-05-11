@@ -33,7 +33,6 @@ function getByStore() {
 
 
 function makeWatchData() {
-
     let  fns = {};
     for (let o in data) {
         (function (o) {
@@ -63,7 +62,7 @@ module.exports = {
     methods: {
 
    
-        //快速添加引用
+        //css快速添加引用
         quickAdd: function () {
 
             var i;
@@ -83,17 +82,16 @@ module.exports = {
             }
             links.push(link);
             $textarea.val(links.join("\n"));
-            data["JsExternal"] = $textarea.val();
+            data["CssExternal"] = $textarea.val();
         },
 
-        //快速添加引用
+        //js快速添加引用
         quickAdd2: function (event) {
-
             var i;
             var links;
             var $textarea;
             var $that = $(event.currentTarget);
-            var link = $that.data("src");
+            var link = $that.val();
         
             $textarea = $that.closest(".form-item").find("textarea");
             links = $.trim($textarea.val()).split("\n");
@@ -117,11 +115,22 @@ module.exports = {
 
 
     created() {
-    
+        //默认加载项
+        var baseCss = [
+                'http://hometest.chinayasha.com/assets/css/base.css?v=1.2.0',
+                'http://hometest.chinayasha.com/assets/css/public.css?v=1.2.0',
+                'http://hometest.chinayasha.com/assets/css/easyui.css?v=1.2.0',
+                'http://hometest.chinayasha.com/assets/css/form-common.css?v=1.2.0'
+            ],
+            baseJs = [
+                'http://hometest.chinayasha.com/assets/seajs/sea.js'
+            ];
+        this.CssExternal = baseCss.join('\n');
+        this.JsExternal = baseJs.join('\n');
     },
     mounted() {
         vs.penSettingVue = this;
         vs.penSettingVueData = this._data;
-
+        vs.doRunByEditor(null, true);   //页面渲染后运行编辑器
     }
 }

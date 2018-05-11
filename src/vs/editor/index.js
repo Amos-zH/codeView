@@ -80,8 +80,6 @@ function doRun(data, reload) {
 
     runType = utils.GetDocType(datas.Html);
 
-
-
     if (runType) {
 
         headHtml = utils.getHeadHtml(datas.Html);
@@ -126,7 +124,6 @@ function doRun(data, reload) {
     runIframe.frameborder = '0';
     runContainer.appendChild(runIframe);
     vs.runIframe = runIframe;
-
     var eidtorDatas = window.top.eidtorDatas = {
         Html: datas.Html,
         Css: datas.Css,
@@ -136,7 +133,7 @@ function doRun(data, reload) {
     //绑定框架回调函数
     var $iframe = $(vs.runIframe);
     var HasRunIframeLoadFn = false;
-    var iframeLoadFn = function () {
+    var     iframeLoadFn = function () {
         if (HasRunIframeLoadFn)
             return;
         HasRunIframeLoadFn = true;
@@ -222,7 +219,6 @@ function doRunByStore() {
     doRun(getEditorStore());
 };
 
-
 /**
  * 设置编辑器缓存
  * @param {object} 编辑器数据对象
@@ -230,7 +226,7 @@ function doRunByStore() {
 function setEditorStore (data) {
 
     for (var o in data) {
-        store.set(o, data[o]);
+        //store.set(o, data[o]);
     }
 };
 
@@ -240,21 +236,18 @@ function setEditorStore (data) {
 function getEditorStore() {
 
     var data = {};
-
    getEditors().each(function () {
          var type = $(this).data("type");
-        data[type] = store.get(type);
+        //data[type] = store.get(type);
     });
 
     return data;
 };
 
-
 /*
 *设置编辑器内容
 */
 function setEditorValue(data) {
-
     var editor;
 
     for (var o in data) {
@@ -265,9 +258,24 @@ function setEditorValue(data) {
     }
 
     setEditorStore(data);
-};
+}
 
-
+/*
+* 获取编辑器的内容
+*/
+export function getEditorValue() {
+    var _json = {};
+    var $editors = getEditors();
+    /*获取html,css,js代码*/
+    $editors.each(function () {
+        var $this = $(this),
+            type = $this.data("type"),
+            value = store.get(type) || "";
+        // _json.push(type+'：'+value);
+        _json[type] = value;
+    });
+    return _json;
+}
 
 /*
 *清空编辑器存储的数据
@@ -300,7 +308,6 @@ vs.setEditorValueAndRun = setEditorValueAndRun;
 *@param {object} 编辑器 jquery dom节点对象
 */
 export function initEditor($editors) {
-
     var timer;
     var editorConfig = config.editor;
 
@@ -312,7 +319,7 @@ export function initEditor($editors) {
         if ($editor.data("bind")) return;
 
         type = $editor.data("type");
-        defaultVal = store.get(type) || "";
+        defaultVal = /*store.get(type) || */"";     //不获取缓存
         editorInner = $("<div class='inner'/>")[0];
 
         $editor.append(editorInner);
@@ -367,7 +374,7 @@ export function bindEditor() {
         initEditor($editors);
 
         //设置编辑器缓存
-        setEditorStore(editorData);
+        //setEditorStore(editorData);
 
         //执行编辑器内容
         doRun(editorData);
@@ -380,6 +387,7 @@ export function bindEditor() {
         //内容不为空 执行编辑器
         if (!isAllEmpty) {
             doRunByStore();
+            // doRun()
         }
     }
 
