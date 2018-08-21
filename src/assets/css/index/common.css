@@ -24,5 +24,65 @@
 
 .selcls {
     width:100%;
-     padding:4px;
+    padding:4px;
+}
+
+.interActive {
+    background: #dad9d5;
+}
+.list-input {
+    width: 100%;
+    height: 40px;
+    line-height: 26px;
+    padding: 4px 8px;
+    font-size: 14px;
+    border: 3px solid #ccc;
+    margin-bottom: -3px;
+}
+.list-input span {
+    display: inline-block;
+    width: 64%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.hover-btn:hover {
+    color: #0b5fb2;
+    cursor: pointer;
+    border: 3px solid #0b5fb2;
+}
+.add-btn {
+    text-align: center;
+    border:3px dashed #ccc;
+    font-size: 28px;
+}
+.list-block {
+    display: block;
+    margin-bottom: 10px;
+}
+.common-btn {
+    display: inline-block;
+    line-height: 34px;
+    min-width: 100px;
+    padding: 0 10px;
+    background: #1E9FF2;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 6px 33%;
+}
+.common-btn:hover {
+    opacity: .8;
+}
+.item-text {
+    text-align: left;
+    margin-bottom: 10px;
+}
+.item-textarea {
+    width: 100%;
+    resize: none;
+    padding: 6px;
+;
 }

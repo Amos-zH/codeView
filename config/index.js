@@ -4,10 +4,11 @@ var path = require('path')
 module.exports = {
   build: {
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../dist/index.html'),
-    assetsRoot: path.resolve(__dirname, '../dist'),
-    //index: path.resolve('','E:\\project\\GitLab-project\\ysportal\\ysportal-manager\\src\\main\\webapp\\resources\\js\\cms\\code-editor\\index.html'),
-    //assetsRoot: path.resolve('','E:\\project\\GitLab-project\\ysportal\\ysportal-manager\\src\\main\\webapp\\resources\\js\\cms\\code-editor'),
+    //index: path.resolve(__dirname, '../dist/index.html'),
+    //assetsRoot: path.resolve(__dirname, '../dist'),
+      // D:\workspace\idea\oa\oa-manager\src\main\webapp\js\module\form
+      index: path.resolve(__dirname, 'E:\\project\\GitLab-project\\oa\\oa-manager\\src\\main\\webapp\\js\\module\\form\\code-editor\\index.html'),
+      assetsRoot: path.resolve(__dirname, 'E:\\project\\GitLab-project\\oa\\oa-manager\\src\\main\\webapp\\js\\module\\form\\code-editor\\'),
 
     assetsSubDirectory: 'static',
     //Ϊ�˷�����vue-codepen����Ԥ�����õ�Ŀ¼

@@ -127,12 +127,12 @@
                     快速添加
                   </h4>
                   <div class="form-c cf quick-add-box">
-                    <select id="css-quick-add" class="quick-add-select" v-on:change="quickAdd">
+                    <select id="css-quick-add" class="quick-add-select" v-on:change="quickAddCss">
                       <option value="none">---</option>
-                      <option value="http://hometest.chinayasha.com/assets/css/base.css?v=1.2.0">base.css</option>
+                      <!--<option value="http://hometest.chinayasha.com/assets/css/base.css?v=1.2.0">base.css</option>
                       <option value="http://hometest.chinayasha.com/assets/css/public.css?v=1.2.0">public.css</option>
                       <option value="http://hometest.chinayasha.com/assets/css/easyui.css?v=1.2.0">easyui.css</option>
-                      <option value="http://hometest.chinayasha.com/assets/css/form-common.css?v=1.2.0">form-common.css</option>
+                      <option value="http://hometest.chinayasha.com/assets/css/form-common.css?v=1.2.0">form-common.css</option>-->
                     </select>
                   </div>
                 </div>
@@ -164,14 +164,14 @@
                     快速添加
                   </h4>
                   <div class="form-c cf quick-add-box">
-                    <select id="js-quick-add" class="quick-add-select" v-on:change="quickAdd2">
+                    <select id="js-quick-add" class="quick-add-select" v-on:change="quickAddJs">
                       <option value="none">---</option>
-                      <option value="http://hometest.chinayasha.com/assets/seajs/sea.js">sea.js</option>
+                      <option value="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js">jquery</option>
                     </select>
                   </div>
 
-                  <!--<div class="form-c cf quick-select">
-                    <a data-src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" v-on:click="quickAdd2" href="javascript:;">
+                 <!-- <div class="form-c cf quick-select">
+                    <a data-src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" v-on:click="quickAddJs" href="javascript:;">
                       jQuery
                     </a>
                   </div>-->

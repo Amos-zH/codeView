@@ -225,7 +225,7 @@
     transition: all 0.3s ease;
     right:-360px;
     padding:0px 0px 0px 20px;
-
+    overflow: auto;
 }
 .setting-box.show {
     right:0px;

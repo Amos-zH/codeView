@@ -205,7 +205,7 @@ function doRunByEditor(data, reload) {
     doRun(data, reload);
 
     //设置缓存
-    setEditorStore(data);
+    // setEditorStore(data);
 };
 
 vs.doRunByEditor = doRunByEditor;
@@ -216,7 +216,7 @@ vs.doRunByEditor = doRunByEditor;
 function doRunByStore() {
 
     //运行代码
-    doRun(getEditorStore());
+    // doRun(getEditorStore());
 };
 
 /**
@@ -226,7 +226,7 @@ function doRunByStore() {
 function setEditorStore (data) {
 
     for (var o in data) {
-        //store.set(o, data[o]);
+        store.set(o, data[o]);
     }
 };
 
@@ -238,7 +238,7 @@ function getEditorStore() {
     var data = {};
    getEditors().each(function () {
          var type = $(this).data("type");
-        //data[type] = store.get(type);
+        data[type] = store.get(type);
     });
 
     return data;
@@ -257,21 +257,20 @@ function setEditorValue(data) {
         }
     }
 
-    setEditorStore(data);
+    // setEditorStore(data);
 }
 
 /*
 * 获取编辑器的内容
 */
 export function getEditorValue() {
-    var _json = {};
-    var $editors = getEditors();
+    let _json = {};
+    let $editors = getEditors();
     /*获取html,css,js代码*/
     $editors.each(function () {
-        var $this = $(this),
+        let $this = $(this),
             type = $this.data("type"),
-            value = store.get(type) || "";
-        // _json.push(type+'：'+value);
+            value = editors[type].getValue() || "";
         _json[type] = value;
     });
     return _json;
@@ -332,11 +331,11 @@ export function initEditor($editors) {
         editor = window.monaco.editor.create(editorInner, options);
  
         //鼠标移上绑定事件
-        editor.onMouseLeave(function (e) {
+       /* editor.onMouseLeave(function (e) {
 
             var val = editor.getValue() || "";
             store.set(type, val);
-        });
+        });*/
 
         //编辑器 keyup 运行代码
         editor.onKeyUp(function () {

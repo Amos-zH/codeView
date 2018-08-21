@@ -1,7 +1,7 @@
-# code-view
+# vue-codepen
 
-> 这个是一个仿codepen的 vue项目，借用https://github.com/heqing0712/vue-codepen。
-在线编辑器使用了 vscode 的web版编辑器 monaco-editor。
+> 这个是一个仿codepen的 vue项目，目前只实现了主要的前端部分，后端部分暂未实现，后期版本再跟进。
+在线编辑器使用了 vscode 的web版编辑器 monaco-editor，因为vscode非常强大，相信后续扩展会更好一些。项目代码有些地方写得不友好的地方，还请大家指出来，一起去完善哦 ^_^。
 
 ---
 ##### 环境

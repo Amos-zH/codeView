@@ -15,31 +15,33 @@
 
         <div class="title-box">
           <div id="title-text" class="title-text" style="display: inline;">
-            <label>表单名称：<input v-model="formName" type="text" id="title-ipt" placeholder="输入表单名称" class="tit-ipt focus" name="formName"></label>
-            <label>SN：<input v-model="sn" type="text" id="title-sn" placeholder="输入" class="tit-ipt focus" name="sn" :readonly="isReadOnly" :style="[{background:isReadOnly ? '#e5e5e5' : '#fff'}]"></label>
+            <!--<label>表单名称：<input v-model="formName" type="text" id="title-ipt" placeholder="输入表单名称" class="tit-ipt focus" name="formName"></label>-->
+            <label>表单名称：<span id="title-ipt" class="head-text" name="formName">{{ formName }}</span></label>
+            <!--<label>SN：<input v-model="sn" type="text" id="title-sn" placeholder="输入" class="tit-ipt focus" name="sn" :readonly="isReadOnly" :style="[{background:isReadOnly ? '#e5e5e5' : '#fff'}]"></label>-->
+            <label>SN：<span id="title-sn" class="head-text" name="sn" >{{ sn }}</span></label>
+            <label>所属系统：<span class="head-text" name="" >{{ sys }}</span></label>
           </div>
-          <div style="display: inline-block;vertical-align: top;">
+          <!--<div style="display: inline-block;vertical-align: top;">
             所属系统：
             <select name="" v-model="sys" style="height:32px;line-height:32px;width:200px;">
               <option :value="item.name" v-for="item in systems">{{ item.name }}</option>
             </select>
-          </div>
+          </div>-->
         </div>
-
 
         <div class="action-box">
 
-          <a href="javascript:;" v-on:click="runEditor"  class="btn">执行</a>
+          <a href="javascript:void(0);" @click="runEditor"  class="btn">执行</a>
         
           <!--<a href="javascript:;" v-on:click="clearPen" class="btn">清空</a>-->
 
-          <a href="javascript:;" class="btn view-btn" v-on:click="showSettingBox">视图</a>
+          <a href="javascript:void(0);" @click="showSettingBox" class="btn view-btn">视图</a>
 
-          <a href="javascript:;" v-on:click="setting" class="btn">设置</a>
+          <a href="javascript:void(0);" @click="setting" class="btn">设置</a>
 
-          <a href="javascript:;" @click="saveCode" class="btn">保存</a>
+          <a href="javascript:void(0);" @click="saveCode" class="btn">保存</a>
 
-          <a href="javascript:;" @click="publishCode" class="btn">发布</a>
+          <a href="javascript:void(0);" @click="publishCode" class="btn">发布</a>
           <div class="penSettingBox" style="display: none;">
             <p id="dialog-confirm">此操作将会发布到正式环境，并增加一个版本号，确定吗？</p>
           </div>
@@ -211,14 +213,12 @@
           </div>
         </div>
 
-
       </header>
 
       <div class="page-wrap" id="page-wrap">
         <layout></layout>
         
         <div class="bg-mask" v-on:click="hideViewBox" v-bind:class="{ show: isShowBgMask }"></div>
-     
       </div>
 
       <div class="setting-box" id="settingBox" v-bind:class="{ show: isShowSettingBox }">
@@ -233,15 +233,12 @@
 
           <div class="set-box">
 
-      
-
             <div class="form-item">
               <h4>
                 编辑器字体大小
               </h4>
 
               <select  v-model="fontSize" class="select-control">
-
                 <option value="11">11px</option>
                 <option value="12">12px</option>
                 <option value="13">13px</option>
@@ -257,11 +254,7 @@
                 <option value="23">23px</option>
                 <option value="24">24px</option>
               </select>
-
-
             </div>
-
-
 
             <div class="form-item">
               <h4>
@@ -287,25 +280,78 @@
                     <label class="custom-control-label" for="themeRadio3">深蓝</label>
                   </div>
                 </div>
-
               </div>
-
 
             </div>
 
+            <div class="form-item">
+              <h4>数据源</h4>
 
+              <ul>
+                <li class="list-input" :class="{ interActive:isActive === index }" v-for="(item, index) in dataSources" @click="showInterDetail(item, index)" :title="item.title">
+                  <span>{{ item.title }}</span>
+                  <div style="float: right;">
+                    <button type="button" @click="interTest(index)" style="cursor: pointer;">测试</button>
+                    <button type="button" @click.stop="interDel(index)" style="cursor: pointer;">删除</button>
+                  </div>
+                </li>
+                <li class="list-input hover-btn add-btn" @click="interAdd">+</li>
+              </ul>
 
+              <!-- 测试弹窗Start -->
+              <div class="penSettingBox" style="display: none;">
+                <div id="dialog-interTest">
+                  <div>
+                    <p class="item-text">请求参数：</p>
+                    <textarea class="item-textarea" cols="30" rows="8" v-model="requestData"></textarea>
+                  </div>
+                  <a href="javascript:void(0);" class="common-btn" @click="interTestBtn" style="margin: 10px 0;width: 200px;">测试</a>
+                  <div>
+                    <p class="item-text">响应结果：</p>
+                    <textarea class="item-textarea" cols="30" rows="8" v-model="requestResult"></textarea>
+                  </div>
+                </div>
+              </div>
+              <!-- 测试弹窗End -->
+              <!-- 删除弹窗Start -->
+              <div class="penSettingBox" style="display: none;">
+                <p id="dialog-interDel">确定删除本条数据源吗？</p>
+              </div>
+              <!-- 删除弹窗End -->
+            </div>
+
+            <div class="form-item" v-show="ifShow">
+              <h4>接口详情</h4>
+
+              <form action="">
+                <label class="list-block">
+                  标题：
+                  <input type="text" class="list-input" v-model="dataDetaile.title">
+                </label>
+                <label class="list-block">
+                  接口名：
+                  <input type="text" class="list-input" v-model="dataDetaile.className">
+                </label>
+                <label class="list-block">
+                  方法名：
+                  <input type="text" class="list-input" v-model="dataDetaile.method">
+                </label>
+                <label class="list-block">
+                  版本号：
+                  <input type="text" class="list-input" v-model="dataDetaile.version">
+                </label>
+                <label>
+                  备注：
+                  <textarea class="list-input" v-model="dataDetaile.remark" cols="30" rows="4" style="resize: none;"></textarea>
+                </label>
+                <a href="javascript:void(0);" class="common-btn" @click="interSave">保存</a>
+              </form>
+            </div>
 
           </div>
-
-           
-          </div>
-
-      
 
         </div>
-
-  
+      </div>
 
       <div class="bg-mask" v-on:click="hideSettingBox" v-bind:class="{ show: isShowBgMask }"></div>
 
@@ -315,27 +361,20 @@
         </div>
       </footer>
 
-      
     </div>
 
-
+    <!-- 弹窗 -->
     <penSettingDialog></penSettingDialog>
 
   </div>
 
-
-
 </template>
-
-
-
 
 <script>
 
   import index from "./router/index";
 
   export default  index
-
 
 </script>
 

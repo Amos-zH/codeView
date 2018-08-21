@@ -1304,8 +1304,8 @@ dialog.setting = {
     fixed: false, 			    // 是否静止定位
     left: '50%', 			    // X轴坐标
     top: '38.2%', 			    // Y轴坐标
-    max: true,                  // 是否显示最大化按钮
-    min: true,                  // 是否显示最小化按钮
+    max: false,                  // 是否显示最大化按钮
+    min: false,                  // 是否显示最小化按钮
     zIndex: 1976, 			    // 对话框叠加高度值(重要：此值不能超过浏览器最大限制)
     resize: true, 			    // 是否允许用户调节尺寸
     drag: true, 				// 是否允许用户拖动位置
